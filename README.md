@@ -1,12 +1,12 @@
 # js-Teras
 
-![Build Status](https://github.com/qumonintelligence/teras/actions/workflows/main.yml/badge.svg?branch=main)
-
+![Build Status](https://github.com/qumonintelligence/js-teras/actions/workflows/build.yml/badge.svg?branch=main)
+#### teras
 [![npm version](https://img.shields.io/npm/v/teras.svg?style=flat-square)](https://www.npmjs.com/package/teras)
 [![npm downloads](https://img.shields.io/npm/dm/teras.svg?style=flat-square)](https://www.npmjs.com/package/teras)
 [![Library minified size](https://badgen.net/bundlephobia/min/teras)](https://bundlephobia.com/result?p=teras)
 [![Library minified + gzipped size](https://badgen.net/bundlephobia/minzip/teras)](https://bundlephobia.com/result?p=teras)
-
+#### teras-core
 [![npm version](https://img.shields.io/npm/v/teras-core.svg?style=flat-square)](https://www.npmjs.com/package/teras-core)
 [![npm downloads](https://img.shields.io/npm/dm/teras-core.svg?style=flat-square)](https://www.npmjs.com/package/teras-core)
 [![Library minified size](https://badgen.net/bundlephobia/min/teras-core)](https://bundlephobia.com/result?p=teras-core)
