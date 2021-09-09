@@ -1,7 +1,6 @@
 # Teras
-
-[![Build Status](https://travis-ci.org/[repositoryOwner]/[repositoryName].svg?branch=master)](https://travis-ci.org/[repositoryOwner]/[repositoryName])
-[![License](https://badgen.net/github/license/sebdott/teras)](./LICENSE)
+[![npm version](https://img.shields.io/npm/v/teras.svg?style=flat-square)](https://www.npmjs.com/package/teras)
+[![npm downloads](https://img.shields.io/npm/dm/teras.svg?style=flat-square)](https://www.npmjs.com/package/teras)
 [![Library minified size](https://badgen.net/bundlephobia/min/teras)](https://bundlephobia.com/result?p=teras)
 [![Library minified + gzipped size](https://badgen.net/bundlephobia/minzip/teras)](https://bundlephobia.com/result?p=teras)
 

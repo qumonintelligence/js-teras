@@ -31,7 +31,7 @@ function createOutputOptions(options) {
     globals: {
       'react': 'React',
       'react-dom': 'ReactDOM',
-      'dott43npmtest': 'dott43npmtest',
+      'teras-core': 'teras-core',
     },
     ...options,
   };
@@ -70,7 +70,7 @@ const options = {
     }),
   ],
   external: [
-    'dott43npmtest',
+    'teras-core',
     'react',
     'react-dom'
   ],

@@ -1,6 +1,6 @@
 {
   "name": "teras",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A light weight redux-saga wrapper",
   "cdn": "dist/index.umd.js",
   "main": "dist/index.js",
@@ -85,7 +85,7 @@
   },
   "homepage": "https://github.com/qumonintelligence/teras#readme",
   "dependencies": {
-    "dott43npmtest": "^0.2.17",
-    "redux-persist": "^6.0.0"
+    "redux-persist": "^6.0.0",
+    "teras-core": "^0.0.2"
   }
 }

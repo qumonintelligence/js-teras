@@ -1,9 +1,9 @@
-# Teras
+# teras-core
 
-[![Build Status](https://travis-ci.org/[repositoryOwner]/[repositoryName].svg?branch=master)](https://travis-ci.org/[repositoryOwner]/[repositoryName])
-[![License](https://badgen.net/github/license/sebdott/teras)](./LICENSE)
-[![Library minified size](https://badgen.net/bundlephobia/min/teras)](https://bundlephobia.com/result?p=teras)
-[![Library minified + gzipped size](https://badgen.net/bundlephobia/minzip/teras)](https://bundlephobia.com/result?p=teras)
+[![npm version](https://img.shields.io/npm/v/teras-core.svg?style=flat-square)](https://www.npmjs.com/package/teras-core)
+[![npm downloads](https://img.shields.io/npm/dm/teras-core.svg?style=flat-square)](https://www.npmjs.com/package/teras-core)
+[![Library minified size](https://badgen.net/bundlephobia/min/teras-core)](https://bundlephobia.com/result?p=teras-core)
+[![Library minified + gzipped size](https://badgen.net/bundlephobia/minzip/teras-core)](https://bundlephobia.com/result?p=teras-core)
 
 Teras is a wrapper-library based on [redux](https://github.com/reactjs/redux), [redux-saga](https://github.com/redux-saga/redux-saga) and [react-router](https://github.com/ReactTraining/react-router). (Inspired by [dva-js](https://github.com/dvajs/dva))
 
@@ -12,12 +12,12 @@ Teras is a wrapper-library based on [redux](https://github.com/reactjs/redux), [
 This library is published in the NPM registry and can be installed using any compatible package manager.
 
 ```sh
-npm install teras --save
+npm install teras-core --save
 ```
 or
 
 ```sh
-yarn add teras
+yarn add teras-core
 ```
 
 ## Usage 

@@ -1,5 +1,5 @@
 import React from 'react';
-import core, { Store, connectSocket } from 'dott43npmtest';
+import core, { Store, connectSocket } from 'teras-core';
 import * as ReduxPersist from "redux-persist";
 import { PersistGate } from 'redux-persist/integration/react'
 import storage from 'redux-persist/lib/storage'
