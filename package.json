@@ -15,7 +15,8 @@
     "pre": "run-s pre:*",
     "pre:install": "lerna exec -- yarn install",
     "pre:build": "lerna run build",
-    "pub": "lerna publish --conventional-commits --yes",
+    "pub": "run-s pub:*",
+    "pub:all": "lerna publish from-package --force-publish --yes",
     "ver": "lerna version"
   },
   "repository": {
