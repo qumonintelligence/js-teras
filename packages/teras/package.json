@@ -86,6 +86,6 @@
   "homepage": "https://github.com/qumonintelligence/teras#readme",
   "dependencies": {
     "redux-persist": "^6.0.0",
-    "teras-core": "^0.0.4"
+    "teras-core": "link:../teras-core"
   }
 }
