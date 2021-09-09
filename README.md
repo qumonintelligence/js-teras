@@ -1,4 +1,4 @@
-# js-Teras
+# js-teras
 ### teras
 ![Build Status](https://github.com/qumonintelligence/js-teras/actions/workflows/build.yml/badge.svg?branch=main)
 [![npm version](https://img.shields.io/npm/v/teras.svg?style=flat-square)](https://www.npmjs.com/package/teras)
@@ -12,7 +12,17 @@
 [![Library minified size](https://badgen.net/bundlephobia/min/teras-core)](https://bundlephobia.com/result?p=teras-core)
 [![Library minified + gzipped size](https://badgen.net/bundlephobia/minzip/teras-core)](https://bundlephobia.com/result?p=teras-core)
 
+## Intro
+
 Teras is a wrapper-library based on [redux](https://github.com/reactjs/redux), [redux-saga](https://github.com/redux-saga/redux-saga) and [react-router](https://github.com/ReactTraining/react-router). (Inspired by [dva-js](https://github.com/dvajs/dva))
+
+## Why js-teras?
+
+Teras makes redux easier to be implemented in your react/react-native applications.
+ * Basic redux-saga wrapper
+ * WebSocket connection support
+ * Redux Persist in the box add-on
+ * Loading reducer add-on
 
 ## Installation
 
