@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    // React.js JSX settings.
+    "jsx": "react",
+    "jsxFactory": "React.createElement",
+    "jsxFragmentFactory": "React.Fragment",
+    // Module settings.
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "outDir": "dist",
+    // Strictness and quality settings.
+    "alwaysStrict": true,
+    "forceConsistentCasingInFileNames": true,
+    "importsNotUsedAsValues": "error",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    // "noUnusedLocals": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "strict": true,
+    "declaration": true,
+    "declarationDir": "types",
+    "emitDeclarationOnly": false,
+    // Type-checking settings.
+    "lib": ["es5", "es6", "dom"],
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "types": ["jest", "node", "react-redux"],
+    "typeRoots": ["node_modules/@types"]
+  },
+  "include": [
+    "./src/**/*.ts",
+    "./src/*.tsx",
+    "src/store/createPromiseMiddleware.ts"
+  ],
+  "exclude": [
+    "/node_modules/",
+    ".serverless/**/*",
+    ".webpack/**/*",
+    "_warmup/**/*",
+    "vscode/**/*",
+    "lib/**/*",
+    "tests"
+  ]
+}

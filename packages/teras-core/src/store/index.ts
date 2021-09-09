@@ -1,0 +1,162 @@
+/* eslint-disable no-empty-pattern */
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+
+import createSagaMiddleware from 'redux-saga';
+import * as sagaEffects from 'redux-saga/effects';
+import map from 'lodash/map';
+import loadModel from './loadModel';
+import loading from './loading';
+import createPromiseMiddleware from './createPromiseMiddleware';
+import type { Model, Effects } from './interface';
+
+const { all } = sagaEffects;
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
+  }
+}
+
+class Store {
+  data: any;
+  persistor: any;
+
+  init = ({ models, reduxPersist }: { models: Model[], reduxPersist: any }): any => {
+    const genEffects: any = (
+      effectLbl: string,
+      effect: (arg0: any, arg1: any) => any,
+      operation: { type: string; ms: any } | undefined,
+    ) =>
+      function* () {
+        function* generationEffect(e: {
+          type?: any;
+          _resolve?: any;
+          _reject?: any;
+        }) {
+          const { _resolve, _reject } = e;
+          try {
+            yield sagaEffects.put({
+              type: 'loading/updateState',
+              payload: {
+                [e.type]: true,
+              },
+            });
+
+            const ret: any = yield* effect(e, sagaEffects);
+
+            yield sagaEffects.put({
+              type: 'loading/updateState',
+              payload: {
+                [e.type]: false,
+              },
+            });
+            _resolve(ret);
+          } catch (ee) {
+            _reject(ee);
+          }
+        }
+
+        let type = 'takeEvery';
+
+        if (operation) {
+          type = operation.type;
+        }
+
+        if (type === 'throttle') {
+          if (operation && operation.ms) {
+            yield sagaEffects.throttle(
+              operation.ms,
+              effectLbl,
+              generationEffect,
+            );
+          } else {
+            yield sagaEffects.takeEvery(effectLbl, generationEffect);
+          }
+        } else if (type === 'takeLatest') {
+          yield sagaEffects.takeLatest(effectLbl, generationEffect);
+        } else {
+          yield sagaEffects.takeEvery(effectLbl, generationEffect);
+        }
+      };
+
+    const getEffects = (): Effects => {
+      let effectMain: any[] = [];
+      const lblList: string[] = [];
+      const reducerMain: any = {};
+
+      const modules = {
+        ...models,
+        loading,
+      };
+
+      map(modules, (model: Model) => {
+        const { namespace, reducers, effects } = loadModel(model);
+
+        if (reducers) {
+          reducerMain[namespace] = reducers;
+        }
+
+        if (effects) {
+          effectMain = [
+            ...effectMain,
+            ...map(effects, (eff: { effectLbl: string; effect: any }) => {
+              const { effectLbl, effect } = eff;
+
+              lblList.push(effectLbl);
+
+              if (effect && Array.isArray(effect) && effect.length >= 2) {
+                return genEffects(effectLbl, effect[0], effect[1])();
+              }
+
+              return genEffects(effectLbl, effect)();
+            }),
+          ];
+        }
+      });
+
+      return { effectMain, effectsList: lblList, reducerMain };
+    };
+
+    const genRootSaga = (effs: any[]) =>
+      function* rootSaga() {
+        yield all(effs);
+      };
+
+    const { effectMain, effectsList, reducerMain } = getEffects();
+
+    const promiseMiddleware = createPromiseMiddleware(effectsList);
+
+    const sagaMiddleware = createSagaMiddleware();
+
+    const setupMiddlewares = (m: any[]) => m;
+
+    const composeEnhancers: any =
+      process.env['NODE_ENV'] !== 'production' &&
+        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+        ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+          trace: true,
+          maxAge: 30,
+        })
+        : compose;
+
+    const middlewares = setupMiddlewares([promiseMiddleware, sagaMiddleware]);
+
+    const enhancer = composeEnhancers(applyMiddleware(...middlewares));
+
+    let rootReducer = combineReducers(reducerMain);
+
+    if (reduxPersist) {
+      const { main, config } = reduxPersist;
+      const { persistStore, persistReducer } = main;
+
+      rootReducer = persistReducer(config, rootReducer);
+      this.data = createStore(rootReducer, enhancer);
+      this.persistor = persistStore(this.data);
+    } else {
+      this.data = createStore(rootReducer, enhancer);
+    }
+
+    sagaMiddleware.run(genRootSaga(effectMain));
+  };
+}
+
+export default new Store();

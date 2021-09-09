@@ -1,0 +1,95 @@
+{
+  "name": "teras-core",
+  "version": "0.0.1",
+  "description": "A light weight redux-saga core wrapper",
+  "cdn": "dist/index.umd.js",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "unpkg": "dist/index.umd.js",
+  "module": "dist/index.esm.js",
+  "jsdelivr": "dist/index.umd.js",
+  "umd:main": "dist/index.umd.js",
+  "exports": {
+    ".": [
+      {
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.cjs",
+        "default": "./dist/index.js"
+      },
+      "./dist/index.js"
+    ]
+  },
+  "dependencies": {
+    "@types/react-redux": "^7.1.18",
+    "@types/redux": "^3.6.0",
+    "@types/redux-saga": "^0.10.5",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.1",
+    "redux-saga": "^1.1.3"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^20.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.4",
+    "@rollup/plugin-replace": "^3.0.0",
+    "@types/eslint": "^7.2.9",
+    "@types/jest": "^26.0.22",
+    "@types/lodash": "^4.14.172",
+    "@types/node": "^16.7.4",
+    "@types/prettier": "^2.2.3",
+    "@types/qs": "^6.9.7",
+    "@typescript-eslint/eslint-plugin": "^4.21.0",
+    "@typescript-eslint/parser": "^4.21.0",
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "qs": "^6.10.1",
+    "rollup": "^2.45.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.4.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "ts-jest": "^26.5.4",
+    "ts-jest-resolver": "^1.0.0",
+    "tslib": "^2.3.1",
+    "typedoc": "^0.20.35",
+    "typedoc-plugin-markdown": "^3.6.1",
+    "typescript": "^4.2.4"
+  },
+  "peerDependencies": {
+    "lodash": "4.x",
+    "qs": "^6.x",
+    "react": "^16.8.3 || ^17",
+    "react-dom": "^16.8.3 || ^17"
+  },
+  "scripts": {
+    "start": "rollup -c -w --quiet && eslint --quiet --fix",
+    "doc": "typedoc src/index.ts",
+    "test": "npm run test:lint && npm run test:unit",
+    "test:lint": "eslint \"*/**/*.{ts,js,json}\"",
+    "test:unit": "jest",
+    "lint": "eslint \"*/**/*.{ts,js,json}\" --fix",
+    "build": "rollup --config ./rollup.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qumonintelligence/teras-core.git"
+  },
+  "keywords": [
+    "typescript",
+    "boilerplate",
+    "library"
+  ],
+  "author": {
+    "name": "Sebastian"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/qumonintelligence/teras-core/issues"
+  },
+  "homepage": "https://github.com/qumonintelligence/teras-core#readme"
+}
