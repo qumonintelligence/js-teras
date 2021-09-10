@@ -14,7 +14,7 @@
 
 ## Intro
 
-Teras is a wrapper-library based on [redux](https://github.com/reactjs/redux), [redux-saga](https://github.com/redux-saga/redux-saga) and [react-router](https://github.com/ReactTraining/react-router). (Inspired by [dva-js](https://github.com/dvajs/dva))
+Teras is a wrapper-library based on [redux](https://github.com/reactjs/redux), [redux-saga](https://github.com/redux-saga/redux-saga). (Inspired by [dva-js](https://github.com/dvajs/dva))
 
 ## Why js-teras?
 
