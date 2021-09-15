@@ -4,6 +4,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import * as sagaEffects from 'redux-saga/effects';
 import map from 'lodash/map';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import loadModel from './loadModel';
 import loading from './loading';
 import createPromiseMiddleware from './createPromiseMiddleware';
@@ -15,6 +16,7 @@ declare global {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
   }
 }
+
 
 class Store {
   data: any;
@@ -129,14 +131,19 @@ class Store {
 
     const setupMiddlewares = (m: any[]) => m;
 
-    const composeEnhancers: any =
-      process.env['NODE_ENV'] !== 'production' &&
-        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-        ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-          trace: true,
-          maxAge: 30,
-        })
-        : compose;
+
+    const composeEnhancers = composeWithDevTools({
+      // Specify here name, actionsBlacklist, actionsCreators and other options
+    });
+
+    // const composeEnhancers: any =
+    //   process.env['NODE_ENV'] !== 'production' &&
+    //     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    //     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+    //       trace: true,
+    //       maxAge: 30,
+    //     })
+    //     : compose;
 
     const middlewares = setupMiddlewares([promiseMiddleware, sagaMiddleware]);
 
