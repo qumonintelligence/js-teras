@@ -99,11 +99,7 @@ const options = {
     replace({
       'preventAssignment': true,
       'process.browser': true,
-      process: JSON.stringify({
-        env: {
-          NODE_ENV: "production",
-        }
-      }),
+      'process.env.NODE_ENV': JSON.stringify('production'),
     }),
   ],
 };
