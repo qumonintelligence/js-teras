@@ -88,7 +88,7 @@ const options = {
     replace({
       'preventAssignment': true,
       'process.browser': true,
-      'process.env.NODE_ENV': JSON.stringify('production'),
+      // 'process.env.NODE_ENV': JSON.stringify('production'),
     }),
   ],
 };
