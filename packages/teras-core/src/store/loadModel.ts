@@ -1,6 +1,6 @@
-import omit from 'lodash/omit';
-import pick from 'lodash/pick';
-import map from 'lodash/map';
+import omit from 'lodash.omit';
+import pick from 'lodash.pick';
+import map from 'lodash.map';
 import type { Model } from './interface';
 
 const commonReducers = (INITIAL_STATE: any = {}) => ({
