@@ -10,6 +10,10 @@
   "jsdelivr": "dist/index.umd.js",
   "umd:main": "dist/index.umd.js",
   "exports": {
+    "./*": {
+      "require": "./*.js",
+      "import": "./*.mjs"
+    },
     ".": [
       {
         "import": "./dist/index.mjs",
