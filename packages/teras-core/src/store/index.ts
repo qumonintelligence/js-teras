@@ -4,7 +4,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import * as sagaEffects from 'redux-saga/effects';
 import map from 'lodash.map';
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly.js';
 import loadModel from './loadModel';
 import loading from './loading';
 import createPromiseMiddleware from './createPromiseMiddleware';
