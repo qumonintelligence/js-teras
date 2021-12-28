@@ -24,10 +24,10 @@ class Store {
   init = ({
     models,
     reduxPersist,
-    nextOptions: { HYDRATE },
+    nextOptions,
   }: {
     models: Model[];
-    reduxPersist: any;
+    reduxPersist?: any;
     nextOptions?: any;
   }): any => {
     const genEffects: any = (
@@ -102,6 +102,19 @@ class Store {
 
         if (reducers) {
           reducerMain[namespace] = reducers;
+
+          if (nextOptions && nextOptions.HYDRATE) {
+            reducerMain[namespace][nextOptions.HYDRATE] = (
+              state: any,
+              action: any,
+            ) => {
+              const nextState = {
+                ...state, // use previous state
+                ...action.payload, // apply delta from hydration
+              };
+              return nextState;
+            };
+          }
         }
 
         if (effects) {
@@ -156,19 +169,6 @@ class Store {
     const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
     let rootReducer = combineReducers(reducerMain);
-
-    if (HYDRATE) {
-      rootReducer = (state: any, action: any) => {
-        if (action.type === HYDRATE) {
-          const nextState = {
-            ...state, // use previous state
-            ...action.payload, // apply delta from hydration
-          };
-          return nextState;
-        }
-        return combineReducers(reducerMain);
-      };
-    }
 
     if (reduxPersist) {
       const { main, config } = reduxPersist;
