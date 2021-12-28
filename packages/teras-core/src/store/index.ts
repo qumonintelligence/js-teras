@@ -17,12 +17,19 @@ declare global {
   }
 }
 
-
 class Store {
   data: any;
   persistor: any;
 
-  init = ({ models, reduxPersist }: { models: Model[], reduxPersist: any }): any => {
+  init = ({
+    models,
+    reduxPersist,
+    nextOptions: { HYDRATE },
+  }: {
+    models: Model[];
+    reduxPersist: any;
+    nextOptions?: any;
+  }): any => {
     const genEffects: any = (
       effectLbl: string,
       effect: (arg0: any, arg1: any) => any,
@@ -131,7 +138,6 @@ class Store {
 
     const setupMiddlewares = (m: any[]) => m;
 
-
     const composeEnhancers = composeWithDevTools({
       // Specify here name, actionsBlacklist, actionsCreators and other options
     });
@@ -150,6 +156,19 @@ class Store {
     const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
     let rootReducer = combineReducers(reducerMain);
+
+    if (HYDRATE) {
+      rootReducer = (state: any, action: any) => {
+        if (action.type === HYDRATE) {
+          const nextState = {
+            ...state, // use previous state
+            ...action.payload, // apply delta from hydration
+          };
+          return nextState;
+        }
+        return combineReducers(reducerMain);
+      };
+    }
 
     if (reduxPersist) {
       const { main, config } = reduxPersist;
