@@ -1,6 +1,6 @@
 {
   "name": "teras",
-  "version": "0.0.15",
+  "version": "0.0.15-test",
   "description": "A light weight redux-saga wrapper",
   "cdn": "dist/index.umd.js",
   "main": "dist/index.js",
