@@ -14,4 +14,5 @@ export interface Effects {
   effectMain: any[];
   effectsList: any[];
   reducerMain: any;
+  initialState: any;
 }

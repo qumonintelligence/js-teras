@@ -77,5 +77,6 @@ export default (
         effect,
       })),
     ],
+    state: modelState,
   };
 };

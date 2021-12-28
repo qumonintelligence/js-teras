@@ -91,6 +91,7 @@ class Store {
       let effectMain: any[] = [];
       const lblList: string[] = [];
       const reducerMain: any = {};
+      const initialState: any = {};
 
       const modules = {
         ...models,
@@ -98,24 +99,10 @@ class Store {
       };
 
       map(modules, (model: Model) => {
-        const { namespace, reducers, effects } = loadModel(model);
+        const { state, namespace, reducers = {}, effects } = loadModel(model);
 
-        if (reducers) {
-          reducerMain[namespace] = reducers;
-
-          if (nextOptions && nextOptions.HYDRATE) {
-            reducerMain[namespace][nextOptions.HYDRATE] = (
-              state: any,
-              action: any,
-            ) => {
-              const nextState = {
-                ...state, // use previous state
-                ...action.payload, // apply delta from hydration
-              };
-              return nextState;
-            };
-          }
-        }
+        reducerMain[namespace] = reducers;
+        initialState[namespace] = state;
 
         if (effects) {
           effectMain = [
@@ -135,7 +122,7 @@ class Store {
         }
       });
 
-      return { effectMain, effectsList: lblList, reducerMain };
+      return { effectMain, effectsList: lblList, reducerMain, initialState };
     };
 
     const genRootSaga = (effs: any[]) =>
@@ -143,7 +130,7 @@ class Store {
         yield all(effs);
       };
 
-    const { effectMain, effectsList, reducerMain } = getEffects();
+    const { initialState, effectMain, effectsList, reducerMain } = getEffects();
 
     const promiseMiddleware = createPromiseMiddleware(effectsList);
 
@@ -168,17 +155,34 @@ class Store {
 
     const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
-    let rootReducer = combineReducers(reducerMain);
+    const rootReducer = combineReducers(reducerMain);
+    let rReducer: any;
+
+    if (nextOptions && nextOptions.HYDRATE) {
+      // nextJS settings cater for server side redux store sync
+      rReducer = (state: any, action: any) => {
+        if (action.type === nextOptions.HYDRATE) {
+          const nextState = {
+            ...initialState, // use previous state
+            ...action.payload, // apply delta from hydration
+          };
+          return nextState;
+        } else {
+          return rootReducer(state, action as never);
+        }
+      };
+    }
 
     if (reduxPersist) {
+      // redux persist settings
       const { main, config } = reduxPersist;
       const { persistStore, persistReducer } = main;
 
-      rootReducer = persistReducer(config, rootReducer);
-      this.data = createStore(rootReducer, enhancer);
+      rReducer = persistReducer(config, rReducer);
+      this.data = createStore(rReducer, enhancer);
       this.persistor = persistStore(this.data);
     } else {
-      this.data = createStore(rootReducer, enhancer);
+      this.data = createStore(rReducer, enhancer);
     }
 
     sagaMiddleware.run(genRootSaga(effectMain));
