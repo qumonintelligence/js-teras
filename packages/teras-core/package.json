@@ -1,6 +1,6 @@
 {
   "name": "teras-core",
-  "version": "0.0.15-test02",
+  "version": "0.0.16",
   "description": "A light weight redux-saga core wrapper",
   "cdn": "dist/index.umd.js",
   "main": "dist/index.js",
@@ -56,6 +56,8 @@
     "jest": "^26.6.3",
     "prettier": "^2.2.1",
     "qs": "^6.10.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "rollup": "^2.45.1",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-builtins": "^2.1.2",
@@ -68,9 +70,7 @@
     "tslib": "^2.3.1",
     "typedoc": "^0.20.35",
     "typedoc-plugin-markdown": "^3.6.1",
-    "typescript": "^4.2.4",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "typescript": "^4.2.4"
   },
   "peerDependencies": {
     "qs": "^6.x",
