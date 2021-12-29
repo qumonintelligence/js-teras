@@ -3,7 +3,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 
 import createSagaMiddleware from 'redux-saga';
 import * as sagaEffects from 'redux-saga/effects';
-import map from 'lodash.map';
+import map from 'lodash/map';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly.js';
 import loadModel from './loadModel';
 import loading from './loading';
@@ -163,7 +163,7 @@ class Store {
       rReducer = (state: any, action: any) => {
         if (action.type === nextOptions.HYDRATE) {
           const nextState = {
-            ...initialState, // use previous state
+            ...state,
             ...action.payload, // apply delta from hydration
           };
           return nextState;
@@ -171,6 +171,8 @@ class Store {
           return rootReducer(state, action as never);
         }
       };
+    } else {
+      rReducer = rootReducer;
     }
 
     if (reduxPersist) {
