@@ -25,10 +25,12 @@ class Store {
     models,
     reduxPersist,
     nextOptions,
+    middlewares = [],
   }: {
     models: Model[];
     reduxPersist?: any;
     nextOptions?: any;
+    middlewares: any[];
   }): any => {
     const genEffects: any = (
       effectLbl: string,
@@ -151,9 +153,11 @@ class Store {
     //     })
     //     : compose;
 
-    const middlewares = setupMiddlewares([promiseMiddleware, sagaMiddleware]);
+    const _middlewares = setupMiddlewares([promiseMiddleware, sagaMiddleware]);
 
-    const enhancer = composeEnhancers(applyMiddleware(...middlewares));
+    const mergeMiddlewares = [..._middlewares, ...middlewares];
+
+    const enhancer = composeEnhancers(applyMiddleware(...mergeMiddlewares));
 
     const rootReducer = combineReducers(reducerMain);
     let rReducer: any;
