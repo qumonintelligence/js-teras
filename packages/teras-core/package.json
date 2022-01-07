@@ -1,6 +1,6 @@
 {
   "name": "teras-core",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "A light weight redux-saga core wrapper",
   "cdn": "dist/index.umd.js",
   "main": "dist/index.js",
