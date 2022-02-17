@@ -7,7 +7,7 @@ const loadingGen = (models: Model[]): Model => {
   let reducers: any = {};
 
   map(models, ({ namespace, effects }) => {
-    map(effects, (effectsLbl) => {
+    map(effects, (_, effectsLbl) => {
       const r = {
         [`@@${namespace}/${effectsLbl}/START`](
           state: any,
