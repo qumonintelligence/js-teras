@@ -6,7 +6,7 @@ import * as sagaEffects from 'redux-saga/effects';
 import map from 'lodash/map';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly.js';
 import loadModel from './loadModel';
-import loading from './loading';
+import { loadingGen } from './loading';
 import createPromiseMiddleware from './createPromiseMiddleware';
 import type { Model, Effects } from './interface';
 
@@ -45,8 +45,10 @@ class Store {
         }) {
           const { _resolve, _reject } = e;
           try {
+            const namespace = e.type.split('/')[0];
+
             yield sagaEffects.put({
-              type: 'loading/updateState',
+              type: `loading/@@${namespace}/START`,
               payload: {
                 [e.type]: true,
               },
@@ -55,7 +57,7 @@ class Store {
             const ret: any = yield* effect(e, sagaEffects);
 
             yield sagaEffects.put({
-              type: 'loading/updateState',
+              type: `loading/@@${namespace}/END`,
               payload: {
                 [e.type]: false,
               },
@@ -95,9 +97,11 @@ class Store {
       const reducerMain: any = {};
       const initialState: any = {};
 
+      const loadingModel = loadingGen(models);
+
       const modules = {
         ...models,
-        loading,
+        loadingModel,
       };
 
       map(modules, (model: Model) => {
