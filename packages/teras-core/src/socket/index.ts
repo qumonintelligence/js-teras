@@ -59,11 +59,15 @@ function* listenForSocketMessages({
   namespace,
   onReceived,
   onError,
+  options = {
+    parseMessage: true,
+  },
 }: {
   url: string;
   namespace: string;
   onReceived: any;
   onError: any;
+  options?: any;
 }): any {
   let socket: any, socketChannel: any;
 
@@ -90,7 +94,13 @@ function* listenForSocketMessages({
 
       if (!payload) return;
 
-      const receivedSocketPayload = JSON.parse(payload);
+      let receivedSocketPayload;
+
+      if (options && options.parseMessage) {
+        receivedSocketPayload = JSON.parse(payload);
+      } else {
+        receivedSocketPayload = payload;
+      }
 
       if (onReceived) {
         yield onReceived(receivedSocketPayload, { put, select });
