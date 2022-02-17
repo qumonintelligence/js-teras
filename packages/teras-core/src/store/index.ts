@@ -45,17 +45,15 @@ class Store {
         }) {
           const { _resolve, _reject } = e;
           try {
-            const namespace = e.type.split('/')[0];
-
             yield sagaEffects.put({
-              type: `loading/@@${namespace}/START`,
+              type: `loading/@@${e.type}/START`,
               payload: [e.type],
             });
 
             const ret: any = yield* effect(e, sagaEffects);
 
             yield sagaEffects.put({
-              type: `loading/@@${namespace}/END`,
+              type: `loading/@@${e.type}/END`,
               payload: [e.type],
             });
             _resolve(ret);

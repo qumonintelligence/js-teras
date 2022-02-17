@@ -7,15 +7,21 @@ const loadingGen = (models: Model[]): Model => {
   let reducers: any = {};
 
   map(models, ({ effects }) => {
-    map(effects, (_, effectsLbl) => {
+    map(effects, (namespace, effectsLbl) => {
       const r = {
-        [`@@${effectsLbl}/START`](state: any, { payload }: any): any {
+        [`@@${namespace}/${effectsLbl}/START`](
+          state: any,
+          { payload }: any,
+        ): any {
           return {
             ...state,
             [payload]: true,
           };
         },
-        [`@@${effectsLbl}/END`](state: any, { payload }: any): any {
+        [`@@${namespace}/${effectsLbl}/END`](
+          state: any,
+          { payload }: any,
+        ): any {
           return {
             ...state,
             [payload]: false,
