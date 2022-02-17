@@ -30,6 +30,7 @@ const loadingGen = (models: Model[]): Model => {
       };
 
       reducers = {
+        ...reducers,
         ...r,
       };
     });
