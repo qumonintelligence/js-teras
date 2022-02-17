@@ -6,25 +6,27 @@ const INITIAL_STATE = {};
 const loadingGen = (models: Model[]): Model => {
   let reducers: any = {};
 
-  map(models, ({ namespace }) => {
-    const r = {
-      [`@@${namespace}/START`](state: any, { payload }: any): any {
-        return {
-          ...state,
-          [payload]: true,
-        };
-      },
-      [`@@${namespace}/END`](state: any, { payload }: any): any {
-        return {
-          ...state,
-          [payload]: false,
-        };
-      },
-    };
+  map(models, ({ effects }) => {
+    map(effects, (_, effectsLbl) => {
+      const r = {
+        [`@@${effectsLbl}/START`](state: any, { payload }: any): any {
+          return {
+            ...state,
+            [payload]: true,
+          };
+        },
+        [`@@${effectsLbl}/END`](state: any, { payload }: any): any {
+          return {
+            ...state,
+            [payload]: false,
+          };
+        },
+      };
 
-    reducers = {
-      ...r,
-    };
+      reducers = {
+        ...r,
+      };
+    });
   });
 
   return {

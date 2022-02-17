@@ -49,18 +49,14 @@ class Store {
 
             yield sagaEffects.put({
               type: `loading/@@${namespace}/START`,
-              payload: {
-                [e.type]: true,
-              },
+              payload: [e.type],
             });
 
             const ret: any = yield* effect(e, sagaEffects);
 
             yield sagaEffects.put({
               type: `loading/@@${namespace}/END`,
-              payload: {
-                [e.type]: false,
-              },
+              payload: [e.type],
             });
             _resolve(ret);
           } catch (ee) {
