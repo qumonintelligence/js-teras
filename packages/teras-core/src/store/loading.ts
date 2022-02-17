@@ -6,8 +6,8 @@ const INITIAL_STATE = {};
 const loadingGen = (models: Model[]): Model => {
   let reducers: any = {};
 
-  map(models, ({ effects }) => {
-    map(effects, (namespace, effectsLbl) => {
+  map(models, ({ namespace, effects }) => {
+    map(effects, (effectsLbl) => {
       const r = {
         [`@@${namespace}/${effectsLbl}/START`](
           state: any,
