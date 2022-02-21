@@ -108,7 +108,7 @@ function* listenForSocketMessages({
     }
   } catch (error) {
     if (onError) {
-      yield onError();
+      yield onError(error);
     }
 
     console.log({
