@@ -257,6 +257,7 @@ export default function* connect({
       namespace,
       onReceived,
       onError: () => onError(query, { put, select }),
+      options,
     });
 
     yield take(`${namespace}/disconnect`);
