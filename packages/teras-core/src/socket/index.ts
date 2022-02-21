@@ -229,6 +229,9 @@ export default function* connect({
   onConnected,
   onError,
   onDisconnected,
+  options = {
+    parseMessage: true,
+  },
 }: {
   url: string;
   namespace: any;
@@ -236,6 +239,7 @@ export default function* connect({
   onConnected: any;
   onError: any;
   onDisconnected: any;
+  options?: any;
 }): any {
   yield fork(notConnectFork, { namespace });
   yield fork(connectFork, { namespace });
