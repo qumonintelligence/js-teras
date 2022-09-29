@@ -69,11 +69,7 @@ const options = {
       plugins: [terser()],
     }),
   ],
-  external: [
-    'teras-core',
-    'react',
-    'react-dom'
-  ],
+  external: ['teras-core', 'react', 'react-dom'],
   plugins: [
     terser(),
     typescript2({

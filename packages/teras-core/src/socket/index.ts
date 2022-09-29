@@ -36,7 +36,7 @@ function createSocketChannel(socket: {
   onmessage: ((event: any) => void) | null;
   onclose: () => void;
 }) {
-  return eventChannel((emit): any => {
+  return eventChannel((emit: any): any => {
     socket.onmessage = (event: { data: unknown }) => {
       // emit data
       emit(event.data);
