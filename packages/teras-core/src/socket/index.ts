@@ -103,7 +103,7 @@ function* listenForSocketMessages({
       }
 
       if (onReceived) {
-        yield onReceived(receivedSocketPayload, { put, select });
+        yield onReceived(receivedSocketPayload, { put, select, fork });
       }
     }
   } catch (error) {
